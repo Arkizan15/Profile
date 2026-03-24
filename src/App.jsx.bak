@@ -1,0 +1,327 @@
+import React from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import { 
+  Github, 
+  Linkedin, 
+  Mail, 
+  Code2, 
+  Terminal,
+  Globe,
+  Layout,
+  ArrowUpRight
+} from 'lucide-react';
+
+// --- Data Portofolio ---
+const TECH_STATS = [
+  { name: 'HTML & CSS', percent: 95, icon: <Layout size={18} /> },
+  { name: 'JavaScript', percent: 85, icon: <Terminal size={18} /> },
+  { name: 'React.js & Vite', percent: 80, icon: <Code2 size={18} /> },
+  { name: 'Tailwind CSS', percent: 90, icon: <Layout size={18} /> },
+  { name: 'Node.js & PostgreSQL', percent: 60, icon: <Globe size={18} /> },
+  { name: 'Git & GitHub Tools', percent: 95, icon: <Github size={18} /> },
+];
+
+const JOURNEYS = [
+  {
+    year: '2025',
+    role: 'Peserta Beasiswa Fullstack Developer',
+    organization: 'Coding Camp by DBS Foundation x Dicoding',
+    desc: 'Terpilih dari puluhan ribu pendaftar untuk mengikuti pelatihan intensif Full-Stack Web Developer berstandar industri, mencakup Front-End, Back-End, serta pengembangan soft-skills.'
+  },
+  {
+    year: '2024 — Sekarang',
+    role: 'Siswa Jurusan PPLG',
+    organization: 'SMKN 1 Banyuwangi',
+    desc: 'Mempelajari fundamental ilmu komputer, algoritma pemrograman, pengembangan perangkat lunak, hingga implementasi teknologi web modern secara mendalam.'
+  }
+];
+
+const PROJECTS = [
+  {
+    title: 'Arkizan Portfolio V1',
+    tech: ['React', 'Framer Motion'],
+    github: 'https://github.com/Arkizan15',
+    desc: 'Eksperimen animasi web modern dengan fokus pada UX yang halus.'
+  },
+  {
+    title: 'Management System',
+    tech: ['NodeJS', 'PostgreSQL'],
+    github: 'https://github.com/Arkizan15',
+    desc: 'Sistem efisiensi workflow untuk optimasi pendataan tim.'
+  }
+];
+
+// --- Komponen UI ---
+
+const Navbar = () => {
+  return (
+    <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-slate-100">
+      <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+        <motion.span 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="text-blue-700 font-black text-xl tracking-tight"
+        >
+          ARKAN.
+        </motion.span>
+        <div className="hidden md:flex gap-10 text-sm font-semibold text-slate-600">
+          {['About', 'Skills', 'Journey', 'Projects'].map((item) => (
+            <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-blue-600 transition-colors uppercase tracking-widest">
+              {item}
+            </a>
+          ))}
+        </div>
+        <motion.a 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          href="mailto:contact@arkan.com"
+          className="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-blue-200"
+        >
+          LET'S TALK
+        </motion.a>
+      </div>
+    </nav>
+  );
+};
+
+const Hero = () => (
+  <section id="about" className="min-h-screen pt-20 flex flex-col items-center justify-center relative px-6 text-center">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="max-w-4xl flex flex-col items-center relative z-10"
+    >
+      <div className="relative mb-10">
+        <motion.div 
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
+          className="w-40 h-40 md:w-52 md:h-52 rounded-full border-[6px] border-white shadow-2xl overflow-hidden bg-slate-100 flex items-center justify-center relative z-10"
+        >
+          {/* Ganti dengan URL fotomu */}
+          <img 
+            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Arkan" 
+            alt="Arkan Rifqy Fauzan" 
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
+        <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg z-20">
+          <Code2 size={24} />
+        </div>
+      </div>
+
+      <h2 className="text-blue-600 font-mono text-sm font-bold tracking-[0.3em] uppercase mb-4">Pelajar & Web Developer</h2>
+      <h1 className="text-5xl md:text-8xl font-black text-slate-900 leading-[0.9] mb-8 tracking-tighter">
+        ARKAN RIFQY <br/> FAUZAN.
+      </h1>
+      <p className="text-slate-500 text-lg md:text-xl max-w-2xl mb-12 leading-relaxed font-medium">
+        Siswa PPLG yang berdedikasi mengeksplorasi ekosistem web modern. 
+        Membangun antarmuka yang estetis dan sistem yang efisien.
+      </p>
+
+      <div className="flex flex-wrap justify-center gap-6">
+        <a href="#projects" className="group flex items-center gap-2 font-bold text-slate-900 hover:text-blue-600 transition-colors">
+          LIHAT KARYA <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+        </a>
+        <div className="w-px h-6 bg-slate-200 hidden md:block"></div>
+        <a href="https://github.com/Arkizan15" className="flex items-center gap-2 font-bold text-slate-900 hover:text-blue-600 transition-colors">
+          GITHUB <Github size={18} />
+        </a>
+      </div>
+    </motion.div>
+  </section>
+);
+
+const SkillSection = () => (
+  <section id="skills" className="py-32 px-6 relative">
+    <div className="max-w-4xl mx-auto relative z-10">
+      <div className="mb-16">
+        <h2 className="text-4xl font-black text-slate-900 mb-4 tracking-tight uppercase">Tools & Frameworks.</h2>
+        <div className="w-20 h-2 bg-blue-600 mb-6"></div>
+        <p className="text-slate-500 font-medium">Distribusi teknologi yang paling sering saya gunakan pada repositori GitHub saya.</p>
+      </div>
+      
+      <div className="space-y-8">
+        {TECH_STATS.map((tech, index) => (
+          <motion.div 
+            key={index}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 }}
+          >
+            <div className="flex justify-between items-center mb-2">
+              <span className="font-bold text-slate-800 flex items-center gap-2">
+                <span className="text-blue-600">{tech.icon}</span> {tech.name}
+              </span>
+              <span className="font-mono font-bold text-blue-600">{tech.percent}%</span>
+            </div>
+            <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+              <motion.div 
+                initial={{ width: 0 }}
+                whileInView={{ width: `${tech.percent}%` }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.3 + (index * 0.1), ease: "easeOut" }}
+                className="bg-blue-600 h-full rounded-full"
+              />
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const JourneySection = () => (
+  <section id="journey" className="py-32 px-6 bg-slate-50 relative border-y border-slate-100">
+    <div className="max-w-5xl mx-auto relative z-10">
+      <div className="text-center mb-20">
+        <h2 className="text-4xl font-black text-slate-900 mb-4 tracking-tight uppercase">My Journey</h2>
+        <p className="text-slate-500 font-medium">Langkah dan pencapaian saya dalam dunia teknologi sejauh ini.</p>
+      </div>
+      
+      <div className="space-y-6">
+        {JOURNEYS.map((item, index) => (
+          <motion.div 
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="group bg-white border border-slate-200 p-8 md:p-12 rounded-[2rem] shadow-sm hover:shadow-xl hover:border-blue-200 transition-all flex flex-col md:flex-row gap-6 md:gap-12 items-start"
+          >
+            <div className="md:w-1/3 shrink-0">
+              <span className="inline-block px-4 py-1.5 bg-blue-50 text-blue-600 font-mono font-bold text-sm rounded-full mb-4">
+                {item.year}
+              </span>
+              <h3 className="text-2xl font-black text-slate-900 leading-tight">
+                {item.role}
+              </h3>
+            </div>
+            <div className="md:w-2/3">
+              <h4 className="text-lg font-bold text-blue-600 mb-3">{item.organization}</h4>
+              <p className="text-slate-500 font-medium leading-relaxed">
+                {item.desc}
+              </p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const ProjectSection = () => (
+  <section id="projects" className="py-32 px-6 bg-slate-900">
+    <div className="max-w-6xl mx-auto">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-6">
+        <h2 className="text-4xl font-black text-white uppercase tracking-tight">Proyek Pilihan.</h2>
+        <a href="https://github.com/Arkizan15" className="text-blue-400 font-bold flex items-center gap-2 hover:text-white transition-colors uppercase text-sm tracking-widest">
+          Lihat di Github <ArrowUpRight size={18} />
+        </a>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        {PROJECTS.map((project, idx) => (
+          <motion.div 
+            key={idx}
+            whileHover={{ y: -10 }}
+            className="group relative"
+          >
+            <div className="aspect-video bg-slate-800 rounded-3xl mb-8 overflow-hidden relative">
+              <div className="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+              <div className="w-full h-full flex items-center justify-center text-slate-700">
+                <Globe size={80} strokeWidth={1} />
+              </div>
+            </div>
+            <div className="flex justify-between items-start">
+              <div>
+                <div className="flex gap-2 mb-3">
+                  {project.tech.map(t => (
+                    <span key={t} className="text-[10px] font-black uppercase tracking-widest text-blue-500 border border-blue-500/30 px-2 py-0.5 rounded">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <h3 className="text-3xl font-black text-white mb-3 uppercase tracking-tighter">{project.title}</h3>
+                <p className="text-slate-400 font-medium leading-relaxed">{project.desc}</p>
+              </div>
+              <a href={project.github} className="p-4 bg-white text-slate-900 rounded-full hover:bg-blue-600 hover:text-white transition-all shadow-xl">
+                <Github size={24} />
+              </a>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const ContactSection = () => (
+  <section className="py-32 px-6 bg-white text-center">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      className="max-w-3xl mx-auto"
+    >
+      <h2 className="text-5xl md:text-7xl font-black text-slate-900 mb-10 tracking-tighter uppercase">Mari Terhubung!</h2>
+      <p className="text-slate-500 text-lg md:text-xl mb-12 font-medium">
+        Selalu terbuka untuk berdiskusi soal pemrograman, proyek kolaborasi, atau sekadar bertukar wawasan.
+      </p>
+      <a 
+        href="mailto:contact@arkan.com" 
+        className="inline-block bg-slate-900 text-white px-12 py-6 rounded-full font-black text-xl hover:bg-blue-600 hover:scale-105 transition-all shadow-2xl shadow-slate-200 uppercase tracking-tighter"
+      >
+        Kirim Pesan
+      </a>
+    </motion.div>
+  </section>
+);
+
+const Footer = () => (
+  <footer className="py-20 px-6 border-t border-slate-100 bg-white">
+    <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <div className="text-slate-900 font-black text-2xl tracking-tighter">ARKAN.</div>
+      <div className="flex gap-10">
+        <a href="https://github.com/Arkizan15" className="text-slate-400 hover:text-blue-600 transition-colors"><Github size={24} /></a>
+        <a href="#" className="text-slate-400 hover:text-blue-600 transition-colors"><Linkedin size={24} /></a>
+        <a href="#" className="text-slate-400 hover:text-blue-600 transition-colors"><Mail size={24} /></a>
+      </div>
+      <div className="text-slate-400 font-bold text-xs uppercase tracking-[0.2em]">
+        © 2024 — 2025 ALL RIGHTS RESERVED
+      </div>
+    </div>
+  </footer>
+);
+
+export default function App() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  return (
+    <div className="bg-white text-slate-900 selection:bg-blue-600 selection:text-white font-sans antialiased relative min-h-screen">
+      {/* Grid Pattern Background - Aesthetic Thin Frame */}
+      <div className="fixed inset-0 pointer-events-none z-0 
+                      bg-[linear-gradient(to_right,#cbd5e1_1px,transparent_1px),linear-gradient(to_bottom,#cbd5e1_1px,transparent_1px)] 
+                      bg-[size:4rem_4rem] 
+                      [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] 
+                      opacity-[0.25]">
+      </div>
+
+      <motion.div className="fixed top-0 left-0 right-0 h-1.5 bg-blue-600 z-[60] origin-left" style={{ scaleX }} />
+      <Navbar />
+      <main className="relative z-10">
+        <Hero />
+        <SkillSection />
+        <JourneySection />
+        <ProjectSection />
+        <ContactSection />
+      </main>
+      <Footer />
+    </div>
+  );
+}
