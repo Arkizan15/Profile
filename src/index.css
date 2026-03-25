@@ -7,13 +7,13 @@
   --font-sans: 'Manrope', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --color-accent:       #E85D04;
-  --color-accent-dim:   #F2813A;
-  --color-ink:          #0C0C0C;
-  --color-canvas:       #FAFAF8;
-  --color-surface:      #F5F5F2;
-  --color-border:       #E2E2DE;
-  --color-muted:        #9C9C97;
+  --color-accent:       #3B82F6;
+  --color-accent-dim:   #2563EB;
+  --color-ink:          #000000;
+  --color-canvas:       #FFFFFF;
+  --color-surface:      #F8FAFC;
+  --color-border:       #E2E8F0;
+  --color-muted:        #1E3A8A;
 }
 
 /* ─── Base Reset ──────────────────────────────────────────── */

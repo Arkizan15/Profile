@@ -3,23 +3,23 @@ import { motion, useScroll, useSpring, useInView, AnimatePresence } from 'framer
 import {
   Github, Linkedin, Mail, ArrowUpRight,
   Terminal, Layout, Code2, Database,
-  Cpu, GitBranch, Layers, Box
+  Cpu, GitBranch, Layers, Box,
+  Instagram, MessageCircle
 } from 'lucide-react';
 
 // ─── DATA ─────────────────────────────────────────────────────
 
 const TECH_STACK = [
-  { name: 'JavaScript',      category: 'Language',  icon: <Terminal   size={14} /> },
-  { name: 'PHP',      category: 'Language',  icon: <Terminal   size={14} /> },
-  { name: 'TypeScript',      category: 'Language',  icon: <Code2      size={14} /> },
-  { name: 'Laravel',        category: 'Framework', icon: <Cpu        size={14} /> },
-  { name: 'Express',        category: 'Framework', icon: <Cpu        size={14} /> },
-  { name: 'React.js',        category: 'Framework', icon: <Cpu        size={14} /> },
-  { name: 'Tailwind CSS',    category: 'Styling',   icon: <Layout     size={14} /> },
-  { name: 'Vite',            category: 'Tooling',   icon: <Box        size={14} /> },
-  { name: 'Node.js',         category: 'Backend',   icon: <Layers     size={14} /> },
-  { name: 'MySQL',      category: 'Database',  icon: <Database   size={14} /> },
-  { name: 'Git',             category: 'Tooling',   icon: <GitBranch  size={14} /> },
+  { name: 'JavaScript', category: 'Language', icon: <Terminal size={14} /> },
+  { name: 'PHP', category: 'Language', icon: <Terminal size={14} /> },
+  { name: 'Laravel', category: 'Framework', icon: <Cpu size={14} /> },
+  { name: 'Express.js', category: 'Framework', icon: <Cpu size={14} /> },
+  { name: 'React.js', category: 'Library', icon: <Cpu size={14} /> },
+  { name: 'Tailwind CSS', category: 'Styling', icon: <Layout size={14} /> },
+  { name: 'Vite', category: 'Framework', icon: <Box size={14} /> },
+  { name: 'Node.js', category: 'Backend', icon: <Layers size={14} /> },
+  { name: 'MySQL', category: 'Database', icon: <Database size={14} /> },
+  { name: 'Git', category: 'Tooling', icon: <GitBranch size={14} /> },
 ];
 
 const JOURNEYS = [
@@ -39,24 +39,20 @@ const JOURNEYS = [
   },
 ];
 
-const BLOG_POSTS = [
+const ORGANIZATIONS = [
   {
-    id: 1,
-    category: 'Frontend',
-    title: 'Memahami React Server Components di Era Modern',
-    excerpt: 'Eksplorasi mendalam tentang bagaimana RSC mengubah cara kita membangun aplikasi React yang performatif dan scalable.',
+    year: '2025 — 2026',
+    role: 'Leader',
+    org: 'ENCASA',
+    tag: 'Organization',
+    desc: 'Memimpin dan menyelaraskan visi organisasi, mengkoordinasi seluruh kegiatan serta anggota ENCASA untuk mencapai tujuan bersama dengan efektif.',
   },
   {
-    id: 2,
-    category: 'Design',
-    title: 'Prinsip Tipografi dalam Web Development',
-    excerpt: 'Panduan praktis memilih font pairing yang tepat untuk membangun visual hierarchy yang kuat dan berkarakter.',
-  },
-  {
-    id: 3,
-    category: 'Career',
-    title: 'Refleksi: Satu Tahun Belajar Coding Secara Mandiri',
-    excerpt: 'Perjalanan jujur tentang kesalahan, pelajaran, dan hal-hal yang ingin aku ceritakan kepada diriku sendiri di masa lalu.',
+    year: '2024',
+    role: 'Content Div',
+    org: 'ENCASA',
+    tag: 'Organization',
+    desc: 'Bertanggung jawab atas ideasi, pembuatan, dan pengelolaan konten kreatif yang mendukung representasi visual dan branding organisasi.',
   },
 ];
 
@@ -65,17 +61,17 @@ const BLOG_POSTS = [
 const ease = [0.22, 1, 0.36, 1];
 
 const fadeUp = {
-  hidden:  { opacity: 0, y: 36 },
+  hidden: { opacity: 0, y: 36 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease } },
 };
 
 const fadeIn = {
-  hidden:  { opacity: 0 },
+  hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.6, ease } },
 };
 
 const stagger = (delay = 0.1) => ({
-  hidden:  {},
+  hidden: {},
   visible: { transition: { staggerChildren: delay } },
 });
 
@@ -140,18 +136,17 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const links = ['About', 'Stack', 'Journey', 'Writing', 'Contact'];
+  const links = ['About', 'Stack', 'Journey', 'Organization', 'Contact'];
 
   return (
     <motion.nav
       initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.2, ease }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        scrolled
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled
           ? 'bg-[var(--color-canvas)]/90 backdrop-blur-xl border-b border-[var(--color-border)]'
           : 'bg-transparent'
-      }`}
+        }`}
     >
       <div className="max-w-[1380px] mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
         {/* Wordmark */}
@@ -177,7 +172,9 @@ const Navbar = () => {
 
         {/* CTA */}
         <a
-          href="mailto:contact@arkan.com"
+          href="https://wa.me/6281999640322"
+          target="_blank"
+          rel="noopener noreferrer"
           className="hidden md:flex items-center gap-2 text-[10px] font-semibold font-mono tracking-[0.2em] uppercase border border-[var(--color-ink)] px-4 py-2 hover:bg-[var(--color-ink)] hover:text-white transition-all duration-300"
         >
           Hire Me
@@ -314,8 +311,10 @@ const Hero = () => (
             <div className="flex items-center gap-3 lg:ml-auto">
               {[
                 { href: 'https://github.com/Arkizan15', Icon: Github, label: 'GitHub' },
-                { href: 'https://www.linkedin.com/in/arkan-rifqy-fauzan-137a43223/',                            Icon: Linkedin, label: 'LinkedIn' },
-                { href: 'raffibwi38@gmail.com',     Icon: Mail,    label: 'Email' },
+                { href: 'https://www.linkedin.com/in/arkan-rifqy-fauzan-137a43223/', Icon: Linkedin, label: 'LinkedIn' },
+                { href: 'mailto:raffibwi38@gmail.com', Icon: Mail, label: 'Email' },
+                { href: 'https://www.instagram.com/arkizan15/', Icon: Instagram, label: 'Instagram' },
+                { href: 'https://wa.me/6281999640322', Icon: MessageCircle, label: 'WhatsApp' },
               ].map(({ href, Icon, label }) => (
                 <a
                   key={label}
@@ -499,14 +498,14 @@ const JourneySection = () => (
   </AnimSection>
 );
 
-// ─── WRITING / BLOG ───────────────────────────────────────────
+// ─── ORGANIZATION ─────────────────────────────────────────────
 
-const WritingSection = () => (
+const OrganizationSection = () => (
   <AnimSection
-    id="writing"
+    id="organization"
     className="py-24 md:py-36 max-w-[1380px] mx-auto px-6 md:px-12 w-full"
   >
-    <SectionLabel index={4} label="Writing" />
+    <SectionLabel index={4} label="Organization" />
 
     <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
       <motion.h2
@@ -514,45 +513,48 @@ const WritingSection = () => (
         className="font-display font-black tracking-tighter leading-[0.88] text-[var(--color-ink)]"
         style={{ fontSize: 'clamp(2.6rem, 6vw, 5.5rem)' }}
       >
-        Thoughts &<br />Writing.
+        Leadership &<br />Community.
       </motion.h2>
       <motion.p variants={fadeUp} className="text-sm text-[var(--color-muted)] max-w-xs leading-relaxed">
-        Catatan dan artikel seputar frontend development, desain, dan perjalanan belajar — segera hadir.
+        Pengalaman saya berkontribusi dan memimpin dalam ruang lingkup organisasi, belajar mengambil tanggung jawab yang lebih besar.
       </motion.p>
     </div>
 
-    <motion.div
-      variants={stagger(0.12)}
-      className="grid grid-cols-1 md:grid-cols-3 gap-5"
-    >
-      {BLOG_POSTS.map((post) => (
-        <motion.article
-          key={post.id}
+    <div>
+      {ORGANIZATIONS.map((item, index) => (
+        <motion.div
+          key={index}
           variants={fadeUp}
-          className="glass-card group relative p-8 cursor-pointer hover:border-[var(--color-ink)] transition-all duration-300"
+          className="group grid grid-cols-1 md:grid-cols-[180px_1fr_auto] gap-6 md:gap-12 py-10 border-t border-[var(--color-border)] hover:border-[var(--color-ink)] transition-colors duration-300"
         >
-          {/* Top accent line */}
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-[var(--color-border)] group-hover:bg-[var(--color-accent)] transition-colors duration-400" />
-
-          <div className="flex items-start justify-between mb-6">
-            <span className="text-[8px] font-mono tracking-[0.3em] uppercase border border-[var(--color-accent)]/40 text-[var(--color-accent)] px-2.5 py-1">
-              {post.category}
+          {/* Year + tag */}
+          <div className="shrink-0 pt-1">
+            <p className="font-mono text-xs text-[var(--color-muted)] mb-3">{item.year}</p>
+            <span className="inline-block text-[8px] font-mono font-semibold tracking-[0.3em] uppercase px-2.5 py-0.5 border border-[var(--color-accent)] text-[var(--color-accent)] group-hover:bg-[var(--color-accent)] group-hover:text-white transition-colors duration-300">
+              {item.tag}
             </span>
-            <span className="text-[9px] font-mono text-[var(--color-muted)]">Coming Soon</span>
           </div>
 
-          <h3 className="font-display font-bold text-[1.05rem] text-[var(--color-ink)] leading-snug tracking-tight mb-3 group-hover:text-[var(--color-accent)] transition-colors duration-300">
-            {post.title}
-          </h3>
-          <p className="text-xs text-[var(--color-muted)] leading-relaxed mb-8">{post.excerpt}</p>
-
-          <div className="flex items-center gap-2 text-[9px] font-mono tracking-[0.25em] uppercase text-[var(--color-muted)] group-hover:text-[var(--color-ink)] transition-colors">
-            Read more
-            <ArrowUpRight size={11} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          {/* Content */}
+          <div>
+            <h3 className="font-display font-bold text-xl md:text-2xl tracking-tight text-[var(--color-ink)] mb-1 group-hover:text-[var(--color-accent)] transition-colors duration-300">
+              {item.role}
+            </h3>
+            <p className="text-sm font-semibold text-[var(--color-muted)] mb-4">{item.org}</p>
+            <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-lg">{item.desc}</p>
           </div>
-        </motion.article>
+
+          {/* Arrow */}
+          <div className="flex items-start pt-1">
+            <ArrowUpRight
+              size={18}
+              className="text-[var(--color-border)] group-hover:text-[var(--color-accent)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
+            />
+          </div>
+        </motion.div>
       ))}
-    </motion.div>
+      <div className="border-t border-[var(--color-border)]" />
+    </div>
   </AnimSection>
 );
 
@@ -585,9 +587,11 @@ const ContactSection = () => (
       {/* Right: contact links */}
       <motion.div variants={stagger(0.1)} className="space-y-3 lg:pt-4">
         {[
-          { label: 'Email',    value: 'contact@arkan.com',      href: 'mailto:contact@arkan.com' },
-          { label: 'GitHub',   value: '@Arkizan15',              href: 'https://github.com/Arkizan15' },
-          { label: 'LinkedIn', value: 'Arkan Rifqy Fauzan',      href: '#' },
+          { label: 'WhatsApp', value: '+62 819-9964-0322', href: 'https://wa.me/6281999640322' },
+          { label: 'Email', value: 'raffibwi38@gmail.com', href: 'mailto:raffibwi38@gmail.com' },
+          { label: 'GitHub', value: '@Arkizan15', href: 'https://github.com/Arkizan15' },
+          { label: 'LinkedIn', value: 'Arkan Rifqy Fauzan', href: 'https://www.linkedin.com/in/arkan-rifqy-fauzan-137a43223/' },
+          { label: 'Instagram', value: '@arkizan15', href: 'https://www.instagram.com/arkizan15/' },
         ].map(({ label, value, href }) => (
           <motion.a
             key={label}
@@ -643,14 +647,20 @@ const Footer = () => (
       <p className="text-[9px] font-mono tracking-[0.3em] uppercase text-[var(--color-muted)] text-center">
         © 2024 — 2025 · Arkan Rifqy Fauzan · Banyuwangi, ID
       </p>
-      <div className="flex gap-8">
-        {['GitHub', 'LinkedIn', 'Email'].map((item) => (
+      <div className="flex flex-wrap items-center justify-center gap-5 md:gap-8">
+        {[
+          { name: 'WhatsApp', href: 'https://wa.me/6281999640322' },
+          { name: 'GitHub', href: 'https://github.com/Arkizan15' },
+          { name: 'LinkedIn', href: 'https://www.linkedin.com/in/arkan-rifqy-fauzan-137a43223/' },
+          { name: 'Email', href: 'mailto:raffibwi38@gmail.com' },
+          { name: 'Instagram', href: 'https://www.instagram.com/arkizan15/' },
+        ].map((item) => (
           <a
-            key={item}
-            href={item === 'GitHub' ? 'https://github.com/Arkizan15' : item === 'Email' ? 'mailto:contact@arkan.com' : '#'}
+            key={item.name}
+            href={item.href}
             className="link-underline text-[9px] font-mono tracking-[0.25em] uppercase text-[var(--color-muted)] hover:text-[var(--color-ink)] transition-colors"
           >
-            {item}
+            {item.name}
           </a>
         ))}
       </div>
@@ -680,7 +690,7 @@ export default function App() {
           width: '60vw',
           height: '60vh',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(232,93,4,0.06) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(59,130,246,0.10) 0%, transparent 70%)',
           pointerEvents: 'none',
           zIndex: 0,
         }}
@@ -708,7 +718,7 @@ export default function App() {
           <div className="border-t border-[var(--color-border)]" />
         </div>
 
-        <WritingSection />
+        <OrganizationSection />
 
         <div className="max-w-[1380px] mx-auto px-6 md:px-12">
           <div className="border-t border-[var(--color-border)]" />
