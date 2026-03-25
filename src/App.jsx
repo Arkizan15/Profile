@@ -257,7 +257,7 @@ const Hero = () => (
               style={{ animation: 'pulse 2s cubic-bezier(0.4,0,0.6,1) infinite' }}
             />
             <span className="text-[9px] font-mono tracking-[0.3em] uppercase text-[var(--color-muted)]">
-              Open to Opportunities · 2025
+              Open to Opportunities
             </span>
           </motion.div>
 
@@ -645,7 +645,7 @@ const Footer = () => (
         ARKIZAN
       </a>
       <p className="text-[9px] font-mono tracking-[0.3em] uppercase text-[var(--color-muted)] text-center">
-        © 2024 — 2025 · Arkan Rifqy Fauzan · Banyuwangi, ID
+        © 2026 · Arkan Rifqy Fauzan · Banyuwangi, ID
       </p>
       <div className="flex flex-wrap items-center justify-center gap-5 md:gap-8">
         {[
